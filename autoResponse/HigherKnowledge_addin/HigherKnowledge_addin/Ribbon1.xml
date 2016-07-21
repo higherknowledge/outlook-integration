@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
+  <ribbon>
+    <tabs>
+      <tab idMso="TabMail">
+    <group id="ContentGroup" label="HigherKnowledge">
+    <button id="ReplyButton" label="Reply with HK"
+             screentip="REPLY" onAction="OnReplyButton"
+             supertip="Replies to the current mail with HK template." size="large" getImage="getDone" showImage="true"/>
+    <button id="ViewTemplate" label="View HK Template"
+             screentip="REPLY" onAction="OnViewButton"
+             supertip="Displays the template sent as a reply by this plug in." size="large" getImage="getView" showImage="true"/>
+    </group>
+</tab>
+    </tabs>
+  </ribbon>
+</customUI>
+
