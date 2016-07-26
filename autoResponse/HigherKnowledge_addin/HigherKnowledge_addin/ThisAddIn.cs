@@ -23,8 +23,19 @@ namespace HigherKnowledge_addin
 
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
-            myMail = Application.Session.CurrentUser.AddressEntry.Address;
-           // MessageBox.Show("hahahaha");
+           try
+           {
+                Outlook.Recipient rec = Application.Session.CurrentUser;
+                string type = rec.AddressEntry.Type;
+                if (type.Equals("EX"))
+                    myMail = rec.AddressEntry.GetExchangeUser().PrimarySmtpAddress;
+                else
+                    myMail = rec.AddressEntry.Address;
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Could not fetch the user...");
+            }
         }
 
         void ItemsOpen(ref bool Item)
