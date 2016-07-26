@@ -1,4 +1,4 @@
-﻿using HigherKnowledge_addin.Properties;
+using HigherKnowledge_addin.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -81,6 +81,8 @@ namespace HigherKnowledge_addin
 
         public void OnReplyButton(Office.IRibbonControl control)
         {
+            //Send opening draft to google analytics here
+            ga("clicked");
             var context = control.Context;
             if(context is Outlook.Explorer)
             {
@@ -115,11 +117,11 @@ namespace HigherKnowledge_addin
                 MessageBox.Show("Cannot perform the action in the current context");
             }
         }
+        private bool sent = false;
 
         private void send(Outlook.MailItem mail)
         {
             string name = mail.Sender.Address;
-            
             //DialogResult result = MessageBox.Show("Send HK response to " + name,"Confirmation...", MessageBoxButtons.YesNo);
             //if (result == DialogResult.Yes)
             {
@@ -131,20 +133,48 @@ namespace HigherKnowledge_addin
                     {
                         fetch();
                     }
-
-                    reply.CC = template.cc;
-                    
+                    sent = false;
+                    reply.CC = template.cc;                 
                     reply.HTMLBody = getBody();
                     reply.Subject = template.subject;
                     reply.Display();
+                    ((Outlook.ItemEvents_10_Event)reply).Send += Ribbon1_Send;
+                    ((Outlook.ItemEvents_10_Event)reply).Close += Ribbon1_Close;
                 }
-                catch(NullReferenceException)
+                catch(Exception)
                 {
                     MessageBox.Show("Could not Reply");
                 }
             }
         }
+
         
+
+        private void Ribbon1_Close(ref bool Cancel)
+        {
+            if(!Cancel)
+            {
+                if(!sent)
+                {
+                    //implement google analytics here
+                    ga("closed wihtout sending");
+                }
+            }
+        }
+
+        private void Ribbon1_Send(ref bool Cancel)
+        {
+            if(!Cancel)
+            {
+                MessageBox.Show("Email sent");
+                sent = true;
+                ga("sent");
+                //implement google analytics here.
+            }
+        }
+
+
+
         #endregion
 
         #region Helpers
@@ -190,30 +220,52 @@ namespace HigherKnowledge_addin
                 var res = (HttpWebResponse)request.GetResponse();
                 var stream = res.GetResponseStream();
                 StreamReader reader = new StreamReader(stream);
-                //string response = reader.ReadToEnd();
-                ////reader.Close();
-                //MessageBox.Show(response);
-                ////stream.Close();
-                //response.Replace('\n', '|');
                 DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Template));
                 object obj = ser.ReadObject(stream);
                 template = obj as Template;
                 stream.Close();
+                res.Close();
             }
 
             catch (Exception e)
             {
-                MessageBox.Show("Unable to fetch the template..." );
+                MessageBox.Show("Unable to fetch the template...\n" + e);
             }
         } 
 
-        public string getBody()
+        private string getBody()
         {
             string temp = "";
             foreach (var s in template.body)
                 temp += s + "<br/><br/>";
             return temp;
         }
+
+        private void ga(string action)
+        {
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.google-analytics.com/collect");
+                request.Method = "POST";
+                string data = "v = 1 & t=event & tid=UA-81367328-1 & cid=1";
+                data += "&ec=" + ThisAddIn.User + "&el=Used Add in" + "&ev = 1";
+                data += "&ea=" + action;
+                data = WebUtility.UrlEncode(data);
+                var db = Encoding.ASCII.GetBytes(data);
+                using (var stream = request.GetRequestStream())
+                {
+                    stream.Write(db, 0, db.Length);
+                    stream.Close();
+                }
+                var response = (HttpWebResponse)request.GetResponse();
+                MessageBox.Show(response.StatusCode + "");
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+        }
         #endregion
     }
 }
+
