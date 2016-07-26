@@ -82,7 +82,7 @@ namespace HigherKnowledge_addin
         public void OnReplyButton(Office.IRibbonControl control)
         {
             //Send opening draft to google analytics here
-            ga("clicked");
+            
             var context = control.Context;
             if(context is Outlook.Explorer)
             {
@@ -121,6 +121,7 @@ namespace HigherKnowledge_addin
 
         private void send(Outlook.MailItem mail)
         {
+            ga("clicked");
             string name = mail.Sender.Address;
             //DialogResult result = MessageBox.Show("Send HK response to " + name,"Confirmation...", MessageBoxButtons.YesNo);
             //if (result == DialogResult.Yes)
