@@ -1,5 +1,5 @@
 {
-  Body: ["This is recruit body","Testing"],
-  CC: "hkaddin@gmail.com",
-  Subject: "Test Subject"
+  "Body": ["This is recruit body","Testing"],
+  "CC": "hkaddin@gmail.com",
+  "Subject": "Test Subject"
 }
