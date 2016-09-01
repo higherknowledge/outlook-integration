@@ -9,5 +9,5 @@
   "The Tatva Legal Team"
   ],
   "CC": "",
-  "Subject": "Your Internship Application to Tatva Legal, Bangalore"
+  "Subject": "Your Internship Application to Tatva Legal Bangalore."
 }
