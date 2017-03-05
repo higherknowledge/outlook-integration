@@ -1,14 +1,1 @@
-{
-  "Body": ["Dear Student,",
-  "Thank you for your interest in an internship at JSA, Bangalore. Please answer a minimum of five assessments at the following link <strong>within ten days</strong> of receiving this mail. Make sure you access http://higherknowledge.in/go/jsablr within the next 24 hours, and follow the instructions. Hit the “continue” button to get your first question. Once you submit the answer, you will get the next one. The ten days' time given is inclusive of the day of login.",
-  "Your performance on these assessments will be one of the factors taken into account, when considering you for an internship position. Your chances of getting the internship increase, depending on the number of assessments you complete. The first location you enter will be taken as your preferred location. The students who are shortlisted on the basis of the written assessments may be asked to attend a telephonic discussion before the internship can be confirmed.",
-  "<strong>Make sure you fill in your dates of internship, the name of your College, and upload your CV.</strong>Without this, we won’t be able to process your application. Insert the dates at the “add availability” button on the top left hand side of the page. If you have two sets of dates in mind, enter just the one set of dates that is closer in time. Your application will be processed and we shall revert to you shortly with further steps.",
-  "For any technical issues with logging into your assessment, write to: srivalli@higherknowledge.in",
-  "For any queries or technical issues regarding the assessment please contact: support@higherknowledge.in ",
-  "All the best!",
-  "Regards,",
-  "The JSA Team"
-  ],
-  "CC": "",
-  "Subject": "Your Internship Application to JSA Bangalore"
-}
+{"Body":["Dear Applicant,","Thank you for your interest in an internship at J. Sagar Associates.","Within 24 hours of receiving this mail, please access the link below for your preferred location.","Access http://higherknowledge.in/go/jsablr and follow the instructions. You will have to answer a minimum of five assessments. Hit the “continue” button to get your first assessment. Once you submit the answer, you will get the next. You must complete at least five assessments within 10 days from login (inclusive of the day of login)","These assessments will be a key factor in your selection for internship. Your chances of getting the internship will improve if you choose one location (instead of multiple) and answer more than five assessments. The shortlisted applicants may be interviewed on telephone.","Make sure you fill in your preferred dates for internship, the name of your College, and upload your CV. Without these details, we won’t be able to process your application. Insert the dates at the “add availability” button on the top left hand side of the page. If you have two sets of dates in mind, enter just the one set of dates that is closer in time.","If your candidature is successful we will get back to you with further steps.","All the best!","Regards,","JSA"],"CC":"","Subject":"Your Internship Application to JSA"}
